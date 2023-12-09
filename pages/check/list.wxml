@@ -1,0 +1,17 @@
+<wxs src="/utils/tools.wxs" module="utils" />
+<view class="cu-bar bg-white search ">
+  <view class="search-form round">
+    <text class="cuIcon-search"></text>
+    <input type="text" placeholder="输入搜索的关键词" confirm-type="search"></input>
+  </view>  
+</view>
+<view class="margin padding radius-xl bg-white">
+  <view class="flex align-center"><text class="cuIcon-upload margin-right-sm"></text>孕检上报</view>
+  <view>
+    <view class="flex align-center margin-top text-bold" wx:for="{{checkList}}" data-url="/pages/check/detail?id={{item.id}}" bindtap="toUrl">
+      <view class="flex-twice">{{item.name}}</view>
+      <view class="flex-twice">{{item.weekDay}}</view>
+      <view class="flex-treble text-right text-gray">{{utils.timeago(item.updateTime)}}</view>
+    </view> 
+  </view>
+</view>

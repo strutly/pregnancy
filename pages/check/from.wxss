@@ -1,0 +1,57 @@
+.cu-form-group .title{
+  min-width: 20vw;
+}
+
+.check-list {
+  overflow: hidden;
+}
+
+.check-item {
+  position: relative;
+  float: left;
+  width: 25%;
+}
+.check-item>.bg-gray::after {
+  content: "点我上报";
+  background-color: var(--main);
+  color: var(--white);
+  position: absolute;
+  top: 5px;
+  border-radius: 10px 10px 10px 0;
+  right: 0;
+  padding: 0 7px;
+  font-size: 12px;
+  height: 16px;
+  line-height: 16px;
+}
+
+.check-item>.bg-gray text {
+  border-image-source: radial-gradient(60% 60%, transparent 0px, transparent 100%, rgba(9, 255, 0, 0.425) 100%);
+  border-image-slice: 1;
+  border-width: 3rpx;
+  border-style: solid;
+  border-image-outset: 1px;
+
+}
+.check-item .check-tag {
+  background-color: var(--red);
+  color: var(--white);
+  position: absolute;
+  top: 5px;
+  border-radius: 10px;
+  right: 10px;
+  padding: 5px;
+  font-size: 12px;
+}
+
+.check-text {
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  margin: calc((100vw - 310px) / 8);
+  text-align: center;
+  white-space: normal;
+}
+.cu-form-group picker .picker{
+  text-align: left;
+}

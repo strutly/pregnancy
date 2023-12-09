@@ -1,0 +1,24 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/check/list",
+    "pages/check/detail",
+    "pages/check/from",
+    "pages/chat/from",
+    "pages/chat/from2"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "孕期管理",
+    "navigationBarTextStyle": "black"
+  },
+  "usingComponents": {
+    "topTips": "/components/tips/index"
+  },
+  "networkTimeout": {
+    "request": 30000
+  },
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

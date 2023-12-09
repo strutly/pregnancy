@@ -1,0 +1,4 @@
+/* pages/chat/from.wxss */
+text{
+  word-break: break-all;
+}

@@ -1,0 +1,31 @@
+.add-box{
+  position: relative;
+}
+.icon-add{
+  width: 20vw;
+  height: 20vw;
+  position: absolute;
+  left: 0;
+  top: 2vw;
+}
+.lable-icon{
+  width: 5vw;
+  height: 5vw;
+}
+.modal-box{
+  z-index:100;
+  position: fixed;
+  bottom: 0;  
+  left: 0;
+  top: 0;
+  right: 0;
+  background-color: rgba(180,180,180,0.6);  
+}
+.modal-bg{
+  height: 10vh;
+}
+.modal-content{
+  background-color: var(--ghostWhite);
+  overflow: hidden;
+  border-radius: 5vw 5vw 0 0;
+}

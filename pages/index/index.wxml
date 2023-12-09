@@ -1,0 +1,100 @@
+<topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
+<view class="margin footer-btns">
+  <view class="flex text-center">
+    <view class="bg-gradual-pink add-box flex-sub margin-right-sm padding radius-xl flex flex-direction justify-center">
+      <image src="/images/gravida.png" class="icon-add"></image>
+      <text class="text-sl">{{homeData.addNum||0}}</text>
+      <view class="text-xl margin-top">本月新增</view>
+    </view>
+    <view class="flex-sub margin-left-sm">
+      <view class="bg-white padding-tb-xl radius-xl text-xxl text-white " style="position: relative;" bindtap="toUrl" data-url="/pages/check/list">
+        <view class="cu-tag badge" wx:if="{{homeData.messageNum>0}}">{{homeData.messageNum||0}}</view>
+        <image src="/images/message.png" class="lable-icon"></image>
+        <text class="margin-left-sm text-black text-xl">消息</text>
+      </view>
+      <view class="bg-pink light margin-top padding-tb-xl radius-xl  text-xxl" data-url="/pages/check/from" bindtap="toUrl">
+        <text class="cuIcon-edit text-red"></text>
+        <text class="margin-left-sm text-black text-xl">孕检</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="margin-top bg-white radius-xl text-text-center padding-xl flex align-center justify-center">
+    <image style="width: 20vw;height: 20vw;" src="/images/out-time.png"></image>
+    <view class="margin-left text-center text-xl">
+      <view class="text-main text-bold">{{homeData.outTimeNum}}</view>
+      <view class="margin-top-xl">逾期检查</view>
+    </view>
+  </view>
+
+  <view class="margin-top bg-white radius-xl text-text-center padding-xl flex align-center justify-center">
+    <image style="width: 20vw;height: 20vw;" src="/images/deliver.png"></image>
+    <view class="margin-left text-center text-xl">
+      <view class="text-blue text-bold">{{homeData.nearNum}}</view>
+      <view class="margin-top-xl">临近分娩</view>
+    </view>
+  </view>
+
+  <view class="margin-top bg-white radius-xl text-text-center padding-xl flex align-center justify-center">
+    <image style="width: 20vw;height: 20vw;" src="/images/high-risk.png"></image>
+    <view class="margin-left text-center text-xl">
+      <view class="text-red text-bold">{{homeData.highRiskNum}}</view>
+      <view class="margin-top-xl">高危产妇</view>
+    </view>
+  </view>
+
+</view>
+
+<view class="footer flex justify-center">
+  <view class="bg-cyan round flex justify-center align-center" style="width: 25vw;height: 25vw;" bindtap="toUrl" data-url="/pages/chat/from">
+    <image style="width: 18vw;height: 18vw;" src="/images/ai.png"></image>
+  </view>
+</view>
+
+<view class="cu-modal show" wx:if="{{modalauth}}">
+  <view class="cu-dialog sm">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">授权提示</view>
+    </view>
+    <view class="padding-xl text-left">
+      《清智孕期管理》小程序需要匹配当前手机号是否与本平台信息一致，确认授权后，系统将为通过验证的内部人员开放对应专业服务权限。
+      <view class="text-center margin-top-sm">请点击<text class="text-main"> 确认 </text>进行手机号授权</view>
+    </view>
+
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-gray text-gray" bindtap="modalStatus" data-name="auth">取消</button>
+        <button class="cu-btn bg-main margin-left" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">确定</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="modal-box  flex flex-direction" catchtouchmove="true" wx:if="{{modalScan}}">
+  <view class="modal-bg"></view>
+  <view class="modal-content flex-sub flex flex-direction ">
+    <scroll-view scroll-y="true" style="min-height:45vh;" class="flex-sub radius-sl">
+      <view class="margin padding bg-white flex align-center radius-xl">
+        <image src="{{scanData.headImgUrl||'/images/head.png'}}" style="width: 15vw;height: 15vw;" class="round margin-right-xl"></image>
+        <view class="flex-sub">
+          <view>{{scanData.name}}<text class="margin-left">{{scanData.age}}岁</text></view>
+          <view class="margin-top">{{scanData.phoneNumber}}</view>
+        </view>
+        <view class="text-center">
+          <view class="text-main">{{scanData.medicalRecordNo}}</view>
+          <view class="text-gray margin-top">病历号</view>
+        </view>
+      </view>
+      <view class="margin-top bg-white">
+        <view class="flex padding solid-bottom" wx:for="{{scanData.checkData}}" wx:key="index">
+          <view class="flex-sub">{{item.title}}</view>
+          <view class="{{item.state==1?'text-red':''}} {{item.state==2?'text-yellow':''}}">{{item.value}}</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <view class="flex padding bg-white solids-top text-lg">
+    <view class="cu-btn flex-sub bg-yellow text-white round margin-lr-lg padding-lg" bindtap="choosePic">重新识别</view>
+    <view class="cu-btn flex-sub bg-main round margin-lr-lg padding-lg" bindtap="submit">上报</view>
+  </view>
+</view>

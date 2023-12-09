@@ -1,0 +1,123 @@
+<topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
+<view class="cu-bar bg-gradual-pink search">
+  <view class="search-form round">
+    <text class="cuIcon-search"></text>
+    <input type="text" placeholder="手机号/病历号" confirm-type="search" bindconfirm="serach"></input>
+  </view>
+  <view class="action">
+    <view class=" text-xxl">
+      <text class="cuIcon-scan"></text>
+    </view>
+  </view>
+</view>
+<block wx:if="{{consumerPlan.name}}">
+  <view class="margin padding bg-white radius-xl flex align-center jus">
+    <image src="/images/head.png" class="round" style="width: 100rpx;height:100rpx"></image>
+    <view class="flex-sub margin-left">
+      <view class="flex">
+        <text class="margin-right">{{consumerPlan.name}}</text>
+        <text class="margin-right">{{consumerPlan.age}}岁</text>
+        <text class="text-right flex-sub margin-right text-main">{{consumerPlan.weekDay}}</text>
+      </view>
+      <view class="margin-top flex">
+        <text class="margin-right">{{consumerPlan.phoneNumber}}</text>
+        <text class="flex-sub margin-right text-right">{{consumerPlan.medicalRecordNo}}</text>
+      </view>
+    </view>
+  </view>
+  <block wx:if="{{consumerPlan.checkPlanId}}">
+    <form bindsubmit="submit">
+      <input hidden name="id" value="{{consumerPlan.checkPlanId}}"></input>
+      <view class="bg-white">
+        <view class="cu-form-group">
+          <view class="title">宫高(cm)</view>
+          <input placeholder="宫高(cm)" name="fundalHeight" value="{{consumerPlan.fundalHeight}}"></input>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">腹围(cm)</view>
+          <input placeholder="腹围(cm)" name="abdominalCircumference" value="{{consumerPlan.abdominalCircumference}}"></input>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">体重(kg)</view>
+          <input placeholder="体重(kg)" name="weight" value="{{consumerPlan.weight}}"></input>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">血压</view>
+          <input placeholder="收缩压" name="diastolicPressure" value="{{consumerPlan.diastolicPressure}}"></input>
+          <input placeholder="舒张压" name="systolicPressure" value="{{consumerPlan.systolicPressure}}"></input>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">水肿</view>
+          <picker bindchange="pickerChange" data-name="edema" name="edema" value="{{consumerPlan.edema}}" range="{{edemaArr}}" data-range="{{edemaArr}}">
+            <view class="picker">
+              {{consumerPlan.edema?consumerPlan.edema:'请选择水肿'}}
+            </view>
+          </picker>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">胎心率</view>
+          <input placeholder="胎心率" name="fetalHeartRate" value="{{consumerPlan.fetalHeartRate}}"></input>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">胎位</view>
+          <picker bindchange="pickerChange" data-name="fetalPosition" name="fetalPosition" value="{{consumerPlan.fetalPosition}}" range="{{fetalPositionArr}}" data-range="{{fetalPositionArr}}">
+            <view class="picker">
+              {{consumerPlan.fetalPosition?consumerPlan.fetalPosition:'请选择胎位'}}
+            </view>
+          </picker>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">先露</view>
+          <picker bindchange="pickerChange" data-name="presentation" name="presentation" value="{{consumerPlan.presentation}}" range="{{presentationArr}}" data-range="{{presentationArr}}">
+            <view class="picker">
+              {{consumerPlan.presentation?consumerPlan.presentation:'请选择先露'}}
+            </view>
+          </picker>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">骨盆测量</view>
+          <picker bindchange="pickerChange" data-name="pelvicMeasurement" name="pelvicMeasurement" value="{{consumerPlan.pelvicMeasurement}}" range="{{pelvicMeasurementArr}}" data-range="{{pelvicMeasurementArr}}">
+            <view class="picker">
+              {{consumerPlan.pelvicMeasurement?consumerPlan.pelvicMeasurement:'请选择骨盆测量'}}
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class="flex text-center nav margin-top">
+        <view bindtap="tabChange" data-name="baseCheck" class="cu-item flex-sub {{checkIndex=='baseCheck'?'text-main cur':''}}">
+          {{consumerPlan.showName}}
+        </view>
+        <view bindtap="tabChange" data-name="otherCheck" class="cu-item flex-sub {{checkIndex=='otherCheck'?'text-main cur':''}}" wx:if="{{consumerPlan.otherCheck.length>0}}">
+          其他检查
+        </view>
+      </view>
+      <view class="bg-white padding footer-btns">
+        <view class="check-list" wx:if="{{checkIndex=='baseCheck'}}">
+          <view class="check-item" wx:for="{{consumerPlan.checkResultList}}" wx:key="index">
+            <view class="round {{item.length>0?'bg-cyan':'bg-gray'}} check-text" data-type="{{index}}" data-id="{{consumerPlan.checkPlanId}}" bindtap="choosePic" data-name="orc">
+              <text>{{index}}</text>
+            </view>
+            <view class="check-tag" wx:if="{{consumerPlan.prompts[index]>0}}">{{consumerPlan.prompts[index]}}</view>
+          </view>
+        </view>
+        <view class="check-list" wx:if="{{checkIndex=='otherCheck'}}">
+          <view class="check-item" wx:for="{{consumerPlan.otherPics}}" wx:key="index">
+            <view class="round {{item.length>0?'bg-cyan':'bg-gray'}} check-text" data-type="{{index}}" data-id="{{consumerPlan.checkPlanId}}" bindtap="choosePic" data-name="other">
+              <text>{{index}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="flex footer bg-white text-center solids-top padding">
+        <button class="flex-sub bg-main round  margin-lr-xl" form-type="submit">提交</button>
+      </view>
+
+    </form>
+  </block>
+  <block wx:else>
+    <view class="padding bg-white margin">
+      <text class="cuIcon-info margin-right"></text>不在孕检时间内
+    </view>
+  </block>
+</block>

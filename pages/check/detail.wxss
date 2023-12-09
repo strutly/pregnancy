@@ -1,0 +1,9 @@
+.color-0{
+  color:var(--black);
+}
+.color-1{
+  color: var(--orange);
+}
+.color-2{
+  color: var(--red);
+}

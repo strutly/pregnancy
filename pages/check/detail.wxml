@@ -1,0 +1,92 @@
+<topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
+<view class="padding bg-white flex align-center solid-bottom">
+  <image src="/images/head.png" class="round" style="width: 100rpx;height:100rpx"></image>
+  <view class="flex-sub margin-left">
+    <view class="flex">
+      <text class="margin-right">{{checkPlan.name}}</text>
+      <text class="margin-right">{{checkPlan.age}}岁</text>
+      <text class="text-right flex-sub margin-right text-main">{{checkPlan.weekDay}}</text>
+    </view>
+    <view class="margin-top flex">
+      <text class="margin-right">{{checkPlan.phoneNumber}}</text>
+      <text class="flex-sub margin-right text-right">{{checkPlan.medicalRecordNo}}</text>
+    </view>
+  </view>
+</view>
+<view class="padding grid col-2 bg-white">
+  <view class="margin-top">
+    <text class="text-gray">宫高:</text>
+    <text class="margin-left">{{checkPlan.fundalHeight}}cm</text>
+  </view>
+  <view class="margin-top">
+    <text class="text-gray">腹围:</text>
+    <text class="margin-left">{{checkPlan.abdominalCircumference}}</text>
+  </view>
+  <view class="margin-top">
+    <text class="text-gray">体重:</text>
+    <text class="margin-left">{{checkPlan.weight}}kg</text>
+  </view>
+  <view class="margin-top">
+    <text class="text-gray">血压:</text>
+    <text class="margin-left">{{checkPlan.diastolicPressure}}/{{checkPlan.systolicPressure}}</text>
+  </view>
+  <view class="margin-top">
+    <text class="text-gray">水肿:</text>
+    <text class="margin-left">{{checkPlan.edema}}</text>
+  </view>
+  <view class="margin-top">
+    <text class="text-gray">胎心率:</text>
+    <text class="margin-left">{{checkPlan.fetalHeartRate}}</text>
+  </view>
+  <view class="margin-top">
+    <text class="text-gray">胎位:</text>
+    <text class="margin-left">{{checkPlan.fetalPosition}}</text>
+  </view>
+  <view class="margin-top">
+    <text class="text-gray">先露:</text>
+    <text class="margin-left">{{checkPlan.presentation}}</text>
+  </view>
+  <view class="margin-top">
+    <text class="text-gray">骨盆测量:</text>
+    <text class="margin-left">{{checkPlan.pelvicMeasurement}}</text>
+  </view>
+</view>
+<scroll-view scroll-x class="bg-white nav">
+  <view class="flex text-center">
+    <view bindtap="tabChange" class="cu-item flex-sub {{index==tabCur?'text-main cur':''}}" wx:for="{{checkPlan.checkDatas}}" wx:key="index" data-index="{{index}}">
+      {{item.title}}
+    </view>
+  </view>
+</scroll-view>
+
+<view class="bg-white footer-btns" wx:for="{{checkPlan.checkDatas}}" wx:key="index" data-index="{{index}}" wx:if="{{index==tabCur}}">
+  <view class="padding solid-bottom flex align-center" wx:for="{{item.dataList}}" wx:key="index" wx:for-item="checkData">
+    <view class="flex-sub">{{checkData.title}}</view>
+    <view class="color-{{checkData.state}}">
+      <text>{{checkData.value}}</text>
+      <text class="color-{{checkData.state}}" wx:if="{{checkData.state==2}}">↓</text>
+      <text class="color-{{checkData.state}}" wx:if="{{checkData.state==3}}">↑</text>
+    </view>
+  </view>
+</view>
+<view class="flex footer text-center bg-white solids-top">
+  <view class="round flex-sub padding margin bg-yellow text-white" bindtap="modalStatus" data-name="template">输入卫教</view>
+  <view class="round flex-sub padding margin bg-main" bindtap="check">查核</view>
+</view>
+
+<view class="cu-modal show" wx:if="{{modaltemplate}}">
+  <view class="cu-dialog bg-white">
+    <form bindsubmit="submit">
+      <input name="consumerId" hidden value="{{checkPlan.consumerId}}"></input>
+      <view class="flex padding text-left">
+        <textarea maxlength="-1" class="flex-sub bg-gray padding" placeholder="卫教内容"  name="content" style="height: 30vh;"></textarea>
+      </view>
+      <view class="cu-bar bg-white justify-end">
+        <view class="action">
+          <button class="cu-btn line-gray" bindtap="modalStatus" data-name="template">取消</button>
+          <button class="cu-btn bg-main margin-left" form-type="submit">确定</button>
+        </view>
+      </view>
+    </form>
+  </view>
+</view>

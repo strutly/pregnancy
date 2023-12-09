@@ -7,14 +7,14 @@ CustomPage({
 
   data: {
     messages: [{
-      event:"finish",
-      content:"您好,请问有什么可以帮您吗?"
+      event: "finish",
+      content: "您好,请问有什么可以帮您吗?"
     }]
   },
   onLoad(options) {
     that = this;
   },
-  
+
   onReady() {
     getApp().watch(function (value) {
       if (value.login && value.auth) {
@@ -34,7 +34,7 @@ CustomPage({
     that.websocket.onSocketClosed({
       url: Api.websocketUrl + wx.getStorageSync('token').uid,
       success(res) {
-        console.log("state:",res);
+        console.log("state:", res);
       },
       fail(err) {
         console.log(err);
@@ -46,19 +46,33 @@ CustomPage({
       fail(err) { console.log(err) }
     });
     //接收到消息的处理方法
-    that.websocket.onReceivedMsg(result => {      
+    that.websocket.onReceivedMsg(result => {
       let res = JSON.parse(result.data);
       let messages = that.data.messages;
       let message = messages[0];
-      if(message.event=="loading"){
+      if (message.event == "loading") {
         messages[0] = res;
-      }else if(message.event=="add"&& message.id==res.id){
+      } else if (message.event == "add" && message.id == res.id) {
         message.content += res.content;
         message.event = res.event;
-      }         
+      }
       that.setData({
-        messages:messages
-      })           
+        messages: messages
+      });
+      wx.createSelectorQuery().select(".item-0").boundingClientRect((con) => { // 获取点击要跳转的锚点信息
+        wx.createSelectorQuery().select(".cu-chat").boundingClientRect((res) => { // 获取根元素要滑动的元素
+          console.log(con)
+          console.log(res)
+          
+          wx.pageScrollTo({
+            selector: ".cu-chat",  // 滑动的元素
+            // duration: 1500, //过渡时间
+            scrollTop: con.top - res.top, //到达距离顶部的top值
+          });
+          
+        }).exec();
+      }).exec();
+
     })
     that.linkWebsocket();
   },
@@ -85,22 +99,21 @@ CustomPage({
     let content = e.detail.value.content;
     if (!content) return that.showTips("请输入内容后在发送");
     let messages = that.data.messages;
-    
-
-
-    let mineMessage = {mine:true,id:1,content:content,event:"ask"};
+    let message = messages[0];
+    if (message.event == "add" || message.event == "loading") return that.showTips("请稍后再问")
+    let mineMessage = { mine: true, id: 1, content: content, event: "ask" };
     messages.unshift(mineMessage);
     that.setData({
-      content:"",
-      messages:messages
+      content: "",
+      messages: messages
     })
-    let message = { mine: false, content: "请稍后~~",event:"loading" };
-    messages.unshift(message)
+    let messageLoading = { mine: false, content: "请稍后~~", event: "loading" };
+    messages.unshift(messageLoading)
     that.setData({
-      messages:messages
+      messages: messages
     })
-    Api.chatMessageAdd(content).then(res=>{
+    Api.chatMessageAdd(content).then(res => {
       console.log(res);
-    },err=>{})
+    }, err => { })
   }
 })

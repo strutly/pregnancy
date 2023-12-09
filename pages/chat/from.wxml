@@ -1,6 +1,6 @@
 <topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
 <template name="mine">
-  <view class="cu-item self" style="order:{{1000-index}}">
+  <view class="cu-item self item-{{index}}" style="order:{{1000-index}}">
     <view class="main">
       <view class="content bg-green shadow">
         <text>{{content}}</text>
@@ -10,7 +10,7 @@
   </view>
 </template>
 <template name="assistant">
-  <view class="cu-item" style="order:{{1000-index}}">
+  <view class="cu-item item-{{index}}" style="order:{{1000-index}}">
     <image class="cu-avatar radius bg-white" src="/images/ai.png"></image>
     <view class="main">
       <view class="content shadow">

@@ -22,17 +22,8 @@ App({
   },
   globalData: {
     userInfo: null,
+    systemInfo:wx.getSystemInfoSync(),
     status: { login: false, auth: false },
-  },
-  buf2hex(buffer) {
-    return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
-  },
-  hexToStr(hex) {
-    let str = '';
-    for (let i = 0; i < hex.length; i += 2) {
-      str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
-    }
-    return str;
   },
   watch(method) {
     var obj = this.globalData;

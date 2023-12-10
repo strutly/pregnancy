@@ -2,3 +2,6 @@
 text{
   word-break: break-all;
 }
+.cu-chat{
+  flex-direction: column-reverse;
+}

@@ -59,21 +59,22 @@ CustomPage({
       that.setData({
         messages: messages
       });
+      that.update();
+      
+      /*
+      
+      
       wx.createSelectorQuery().select(".item-0").boundingClientRect((con) => { // 获取点击要跳转的锚点信息
-        wx.createSelectorQuery().select(".cu-chat").boundingClientRect((res) => { // 获取根元素要滑动的元素
-          console.log(con)
-          console.log(res)
-          
+        wx.createSelectorQuery().select(".cu-chat").boundingClientRect((res) => { // 获取根元素要滑动的元素  
           wx.pageScrollTo({
             selector: ".cu-chat",  // 滑动的元素
-            // duration: 1500, //过渡时间
             scrollTop: con.top - res.top, //到达距离顶部的top值
-          });
-          
+          });          
         }).exec();
       }).exec();
-
+      */
     })
+    
     that.linkWebsocket();
   },
   linkWebsocket() {
@@ -112,8 +113,28 @@ CustomPage({
     that.setData({
       messages: messages
     })
+    that.update();
     Api.chatMessageAdd(content).then(res => {
       console.log(res);
     }, err => { })
+  },
+  update() {    
+    that.setData({
+      scrollToView:"base-view"
+    })
+    /*
+    var height = app.globalData.systemInfo.screenHeight;
+    console.log(height)
+    wx.createSelectorQuery().select(".move-base").boundingClientRect(con => {
+      console.log(con)
+      let itemHeight = con.top + con.height;
+      if (itemHeight > height - 300) {
+        wx.pageScrollTo({
+          selector: ".move-base",  // 滑动的元素
+          scrollTop: 650, //到达距离顶部的top值
+        });
+      }
+    }).exec();
+    */
   }
 })

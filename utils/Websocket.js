@@ -32,7 +32,6 @@ export default class Websocket {
         }),
         success(res) {
           console.log(res)
-          console.log("发送心跳成功");
         },
         fail(err) {
           console.log(err)

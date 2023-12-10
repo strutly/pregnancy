@@ -1,20 +1,20 @@
 <topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
 <template name="mine">
-  <view class="cu-item self item-{{index}}" id="item{{index}}">
+  <view class="cu-item self">
     <view class="main">
       <view class="content bg-green shadow">
-        <text>{{content}}</text>
+        <text user-select="true">{{content}}</text>
       </view>
     </view>
     <image class="cu-avatar radius bg-white" src="/images/head.png" bindtap="addMessage"></image>
   </view>
 </template>
 <template name="assistant">
-  <view class="cu-item item-{{index}}" id="item{{index}}">
+  <view class="cu-item">
     <image class="cu-avatar radius bg-white" src="/images/ai.png"></image>
     <view class="main">
       <view class="content shadow">
-        <text>{{content}}</text>
+        <text user-select="true">{{content}}</text>
       </view>
     </view>
   </view>

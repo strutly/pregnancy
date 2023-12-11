@@ -5,7 +5,8 @@
     "pages/check/detail",
     "pages/check/from",
     "pages/chat/from",
-    "pages/chat/from2"
+    "pages/chat/from2",
+    "pages/chat/from3"
   ],
   "window": {
     "backgroundTextStyle": "light",

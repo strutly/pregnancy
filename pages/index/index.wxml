@@ -46,7 +46,7 @@
 </view>
 
 <view class="footer flex justify-center">
-  <view class="bg-cyan round flex justify-center align-center" style="width: 25vw;height: 25vw;" bindtap="toUrl" data-url="/pages/chat/from">
+  <view class="bg-cyan round flex justify-center align-center" style="width: 25vw;height: 25vw;" bindtap="toUrl" data-url="/pages/chat/from3">
     <image style="width: 18vw;height: 18vw;" src="/images/ai.png"></image>
   </view>
 </view>

@@ -71,7 +71,7 @@
 </view>
 <view class="flex footer text-center bg-white solids-top">
   <view class="round flex-sub padding margin bg-yellow text-white" bindtap="modalStatus" data-name="template">输入卫教</view>
-  <view class="round flex-sub padding margin bg-main" bindtap="check">查核</view>
+  <!-- <view class="round flex-sub padding margin bg-main" bindtap="check">查核</view> -->
 </view>
 
 <view class="cu-modal show" wx:if="{{modaltemplate}}">

@@ -1,9 +1,11 @@
 var that;
 import Api from '../../config/api';
-import { WebsocketTask, closeSocket } from '../../utils/WebsocketTask.js';
+import { WebsocketTask, closeSocket,getConnectState} from '../../utils/WebsocketTask.js';
 import CustomPage from '../../CustomPage';
 CustomPage({
   data: {
+    errorMsg:"",
+    errorType:"error",
     messages: [{
       event: "finish",
       content: "您好,请问有什么可以帮您吗?"
@@ -20,7 +22,9 @@ CustomPage({
     });
   },
   onUnload() {
-    closeSocket();
+    if(getConnectState()){
+      closeSocket();
+    }    
   },
   initWebsocket() {
     WebsocketTask({
@@ -48,7 +52,18 @@ CustomPage({
     if (!content) return that.showTips("请输入内容后在发送");
     let messages = that.data.messages;
     let message = messages[0];
-    if (message.event == "add" || message.event == "loading") return that.showTips("请稍后再问")
+    if (message.event == "add" || message.event == "loading") return that.showTips("请稍后再问");
+    if(!getConnectState()) return wx.showModal({
+      title: '小智连接失败',
+      content: '点击重连',
+      showCancel: false,
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定');
+          that.initWebsocket();
+        }
+      }
+    })
     let mineMessage = { mine: true, id: 1, content: content, event: "ask" };
     messages.unshift(mineMessage);
     that.setData({

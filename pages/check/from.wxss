@@ -11,7 +11,7 @@
   float: left;
   width: 25%;
 }
-.check-item>.bg-gray::after {
+.check-item:first-child>.bg-gray::after {
   content: "点我上报";
   background-color: var(--main);
   color: var(--white);
@@ -26,7 +26,7 @@
 }
 
 .check-item>.bg-gray text {
-  border-image-source: radial-gradient(60% 60%, transparent 0px, transparent 100%, rgba(9, 255, 0, 0.425) 100%);
+  border-image-source: radial-gradient(60% 60%, transparent 0px, transparent 100%, rgba(9, 12, 236, 0.425) 100%);
   border-image-slice: 1;
   border-width: 3rpx;
   border-style: solid;
@@ -47,10 +47,14 @@
 .check-text {
   width: 70px;
   height: 70px;
-  line-height: 70px;
   margin: calc((100vw - 310px) / 8);
   text-align: center;
   white-space: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  padding: 16rpx;
 }
 .cu-form-group picker .picker{
   text-align: left;

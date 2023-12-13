@@ -1,11 +1,11 @@
 var that;
 import Api from '../../config/api';
-import { WebsocketTask, closeSocket,getConnectState} from '../../utils/WebsocketTask.js';
+import { WebsocketTask, closeSocket, getConnectState } from '../../utils/WebsocketTask.js';
 import CustomPage from '../../CustomPage';
 CustomPage({
   data: {
-    errorMsg:"",
-    errorType:"error",
+    errorMsg: "",
+    errorType: "error",
     messages: [{
       event: "finish",
       content: "您好,请问有什么可以帮您吗?"
@@ -22,9 +22,9 @@ CustomPage({
     });
   },
   onUnload() {
-    if(getConnectState()){
+    if (getConnectState()) {
       closeSocket();
-    }    
+    }
   },
   initWebsocket() {
     WebsocketTask({
@@ -52,8 +52,8 @@ CustomPage({
     if (!content) return that.showTips("请输入内容后在发送");
     let messages = that.data.messages;
     let message = messages[0];
-    if (message.event == "add" || message.event == "loading") return that.showTips("请稍后再问");
-    if(!getConnectState()) return wx.showModal({
+    if (message.event == "add" || message.event == "loading") return that.showTips("请稍候再问");
+    if (!getConnectState()) return wx.showModal({
       title: '小智连接失败',
       content: '点击重连',
       showCancel: false,
@@ -70,13 +70,19 @@ CustomPage({
       content: "",
       messages: messages
     })
-    let messageLoading = { mine: false, content: "请稍后~~", event: "loading" };
+    let messageLoading = { mine: false, content: "请稍候~~", event: "loading" };
     messages.unshift(messageLoading)
     that.setData({
       messages: messages
     })
     that.update();
-    Api.chatMessageAdd(content).then(res => {
+
+    let fromData = messages.filter((item, index, arr) => {
+      return !!item.id && index < 6;
+    }).reverse().map((item, index, arr) => {
+      return { role: item.mine ? "user" : "assistant", content: item.content };
+    });
+    Api.chatMessageAdd(JSON.stringify(fromData)).then(res => {
       console.log(res);
     }, err => { })
   },

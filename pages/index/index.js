@@ -12,10 +12,7 @@ CustomPage({
     that = this;
   },
   onShow(){
-    console.log("show")
-  },
-  onReady() {
-    console.log("ready")
+    console.log("show");
     getApp().watch(function (value) {
       console.log(value)
       /*
@@ -50,6 +47,10 @@ CustomPage({
         userInfo: wx.getStorageSync('userInfo')
       })
     })
+  },
+  onReady() {
+    console.log("ready")
+    
   },
   getHomeData(){
     Api.homeData().then(res=>{

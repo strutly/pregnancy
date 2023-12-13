@@ -18,19 +18,33 @@ const CustomPage = function (page) {
         page.onReady && page.onReady.call(this)
       },
       toUrl(e) {
+        let that = this;
         console.log(e)
-        let url = e.currentTarget.dataset.url;
-        let msg = e.currentTarget.dataset.msg || '正在开发中~';
-        if (url) {
-          wx.navigateTo({
-            url: url,
-          })
-        } else {
-          wx.showToast({
-            icon: "none",
-            title: msg,
-          })
-        }
+        getApp().watch(function (value) {
+          console.log(value)
+          /*
+            登录成功,并且授权成功 ,获取首页数据
+          */
+          if (value.login && value.auth) {
+            let url = e.currentTarget.dataset.url;
+            let msg = e.currentTarget.dataset.msg || '正在开发中~';
+            if (url) {
+              wx.navigateTo({
+                url: url,
+              })
+            } else {
+              wx.showToast({
+                icon: "none",
+                title: msg,
+              })
+            }
+          } else {
+            that.showTips("您未登录,请先登录");
+            that.setData({
+              modalauth:true
+            })
+          }
+        });
       },
       modalStatus(e) {
         let name = e.currentTarget.dataset.name;
@@ -110,13 +124,13 @@ const CustomPage = function (page) {
       viewImage(e) {
         console.log(e)
         let url = e.currentTarget.dataset.url;
-        if(url){
+        if (url) {
           wx.previewImage({
             urls: [url],
             current: url
           })
         }
-        
+
       },
       showTips(msg = "出错了~", errorType = "error") {
         this.setData({
@@ -131,12 +145,12 @@ const CustomPage = function (page) {
           icon: 'none'
         })
       },
-      async uploadPic(num){
+      async uploadPic(num) {
         console.log(num);
         let fileRes = await wx.chooseMedia({
-          count:num,
-          mediaType:['image'],
-          sizeType:['compressed']
+          count: num,
+          mediaType: ['image'],
+          sizeType: ['compressed']
         });
         console.log(fileRes)
         let files = [];
@@ -155,7 +169,7 @@ const CustomPage = function (page) {
           files.push(fileManager.readFileSync(file.tempFilePath, 'base64'))
         }
         return files;
-      }      
+      }
     })
   )
 }

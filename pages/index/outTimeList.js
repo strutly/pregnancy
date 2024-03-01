@@ -65,6 +65,14 @@ CustomPage({
     console.log(e);
     let data = e.detail.value;
     if(!data.note) return that.showTips("请先填写备注信息");
+    Api.consumerNoteAdd(JSON.stringify(data)).then(res=>{
+      that.setData({
+        modalNote:false,
+      })
+      that.showTips("操作成功","success");
+    },err=>{
+      that.showTips(err.msg);
+    })
 
   }
 

@@ -1,3 +1,9 @@
 .line-0{
-  
+  color: var(--yellow);
+}
+.line-1{
+  color: var(--orange);
+}
+.line-2{
+  color: var(--red);
 }

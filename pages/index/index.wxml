@@ -19,15 +19,15 @@
     </view>
   </view>
 
-  <view class="margin-top bg-white radius-xl text-text-center padding-xl flex align-center justify-center">
+  <view bindtap="toUrl" data-url="/pages/index/outTimeList" class="margin-top bg-white radius-xl text-text-center padding-xl flex align-center justify-center">
     <image style="width: 20vw;height: 20vw;" src="/images/out-time.png"></image>
     <view class="margin-left text-center text-xl">
-      <view class="text-main text-bold">{{homeData.outTimeNum}}</view>
+      <view class="text-main text-bold">{{homeData.outTimeToday}}/{{homeData.outTimeNum}}</view>
       <view class="margin-top-xl">逾期检查</view>
     </view>
   </view>
 
-  <view class="margin-top bg-white radius-xl text-text-center padding-xl flex align-center justify-center">
+  <view bindtap="toUrl" data-url="/pages/index/nearList" class="margin-top bg-white radius-xl text-text-center padding-xl flex align-center justify-center">
     <image style="width: 20vw;height: 20vw;" src="/images/deliver.png"></image>
     <view class="margin-left text-center text-xl">
       <view class="text-blue text-bold">{{homeData.nearNum}}</view>
@@ -35,21 +35,23 @@
     </view>
   </view>
 
-  <view class="margin-top bg-white radius-xl text-text-center padding-xl flex align-center justify-center">
+  <view bindtap="toUrl" data-url="/pages/index/highRiskList" class="margin-top bg-white radius-xl text-text-center padding-xl flex align-center justify-center">
     <image style="width: 20vw;height: 20vw;" src="/images/high-risk.png"></image>
     <view class="margin-left text-center text-xl">
-      <view class="text-red text-bold">{{homeData.highRiskNum}}</view>
+      <view class="text-red text-bold">{{homeData.highRiskToday}}/{{homeData.highRiskNum}}</view>
       <view class="margin-top-xl">高危产妇</view>
     </view>
   </view>
 
 </view>
-
-<view class="footer flex justify-center">
-  <view class="bg-cyan round flex justify-center align-center" style="width: 25vw;height: 25vw;" bindtap="toUrl" data-url="/pages/chat/from3">
-    <image style="width: 18vw;height: 18vw;" src="/images/ai.png"></image>
+<!--
+  <view class="footer flex justify-center">
+    <view class="bg-cyan round flex justify-center align-center" style="width: 25vw;height: 25vw;" bindtap="toUrl" data-url="/pages/chat/from3">
+      <image style="width: 18vw;height: 18vw;" src="/images/ai.png"></image>
+    </view>
   </view>
-</view>
+-->
+
 
 <view class="cu-modal show" wx:if="{{modalauth}}">
   <view class="cu-dialog sm">

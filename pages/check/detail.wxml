@@ -53,21 +53,20 @@
 </view>
 <scroll-view scroll-x class="bg-white nav">
   <view class="flex text-center">
-    <view bindtap="tabChange" class="cu-item flex-sub {{index==tabCur?'text-main cur':''}}" wx:for="{{checkPlan.checkDatas}}" wx:key="index" data-index="{{index}}">
+    <view bindtap="tabChange" class="cu-item flex-sub {{index==tabCur?'text-main cur':''}}" wx:for="{{checkPlan.allPics}}" wx:key="index" data-index="{{index}}">
       {{item.title}}
     </view>
   </view>
 </scroll-view>
 
-<view class="bg-white footer-btns" wx:for="{{checkPlan.checkDatas}}" wx:key="index" data-index="{{index}}" wx:if="{{index==tabCur}}">
-  <view class="padding solid-bottom flex align-center" wx:for="{{item.dataList}}" wx:key="index" wx:for-item="checkData">
-    <view class="flex-sub">{{checkData.title}}</view>
-    <view class="color-{{checkData.state}}">
-      <text>{{checkData.value}}</text>
-      <text class="color-{{checkData.state}}" wx:if="{{checkData.state==2}}">↓</text>
-      <text class="color-{{checkData.state}}" wx:if="{{checkData.state==3}}">↑</text>
-    </view>
-  </view>
+<view class="bg-white footer-btns" wx:for="{{checkPlan.allPics}}" wx:key="index" data-index="{{index}}" wx:if="{{index==tabCur}}">
+  <swiper class="screen-swiper square-dot" indicator-dots="true" circular="true"
+		  autoplay="true" interval="5000" duration="500">
+			<swiper-item wx:for="{{item.pics}}" wx:for-item="pic"  bindtap="viewImage" data-url="{{item.pics[0]}}" data-urls="{{item.pics}}">
+				<image src="{{pic}}" mode="widthFix"></image>				
+			</swiper-item>
+		</swiper>
+
 </view>
 <view class="flex footer text-center bg-white solids-top">
   <view class="round flex-sub padding margin bg-yellow text-white" bindtap="modalStatus" data-name="template">输入卫教</view>

@@ -9,8 +9,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "",
-          "pathName": "pages/chat/from",
+          "name": "pages/index/highRiskList",
+          "pathName": "pages/index/highRiskList",
           "query": "",
           "launchMode": "default",
           "scene": null

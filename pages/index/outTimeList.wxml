@@ -1,0 +1,63 @@
+<topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
+<view class="cu-list menu-avatar solids-top safe-bottom">
+  <view class="cu-item solid-bottom" wx:for="{{members}}" wx:key="index">
+    <image class="cu-avatar round lg" src="{{item.userInfo.headImgUrl}}"></image>
+    <view class="content">
+      <view>
+        <text>{{item.name}}</text>
+        <text class="margin-left">{{item.weekDay}}</text>
+        <text class="margin-left">{{item.age}}岁</text>
+      </view>
+      <view class="text-gray text-sm flex">
+        <view>
+          <view class="cu-capsule round sm" wx:for="{{item.prompts}}" wx:key="key" wx:for-index="key" wx:for-item="num">
+            <view class='cu-tag bg-orange'>
+              {{key}}
+            </view>
+            <view class="cu-tag line-red">
+              {{num}}
+            </view>
+          </view>
+        </view>
+        <view class='flex flex-wrap'>
+          <view class="padding-xs" wx:for="{{item.highRisks}}" wx:key="index" wx:for-item="highRisk">
+            <view class='cu-tag line-yellow'>{{highRisk.name}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="action">
+      <view class="bg-mauve round padding-tb-xs text-sm" data-phone="{{item.phoneNumber}}" bindtap="callPhone">
+        <text class="cuIcon-phone text-lg"></text>拨号
+      </view>
+      <view class="bg-cyan round padding-tb-xs text-sm" bindtap="editNote" data-id="{{item.id}}">
+        <text class="cuIcon-edit"></text>备注
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<view class="cu-modal show" wx:if="{{modalNote}}">
+
+  <view class="cu-dialog sm">
+    <form catchsubmit="submit">
+      <input hidden name="consumerId" value="{{consumerId}}"></input>
+      <view class="cu-bar bg-white justify-end">
+        <view class="content">电话备注</view>
+      </view>
+
+      <view class="cu-form-group text-left solids-top solids-bottom">
+        <textarea name="note" maxlength="-1" placeholder="电话备注消息"></textarea>
+      </view>
+
+      <view class="cu-bar bg-white justify-end">
+        <view class="action">
+          <button class="cu-btn line-green text-green" bindtap="modalStatus" data-name="Note">取消</button>
+          <button class="cu-btn bg-green margin-left" formType="submit">确定</button>
+        </view>
+      </view>
+    </form>
+  </view>
+  
+</view>

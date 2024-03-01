@@ -124,9 +124,10 @@ const CustomPage = function (page) {
       viewImage(e) {
         console.log(e)
         let url = e.currentTarget.dataset.url;
+        let urls = e.currentTarget.dataset.urls;
         if (url) {
           wx.previewImage({
-            urls: [url],
+            urls: urls||[url],
             current: url
           })
         }

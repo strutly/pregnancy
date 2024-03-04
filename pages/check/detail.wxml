@@ -59,14 +59,25 @@
   </view>
 </scroll-view>
 
-<view class="bg-white footer-btns" wx:for="{{checkPlan.allPics}}" wx:key="index" data-index="{{index}}" wx:if="{{index==tabCur}}">
-  <swiper class="screen-swiper square-dot" indicator-dots="true" circular="true"
-		  autoplay="true" interval="5000" duration="500">
-			<swiper-item wx:for="{{item.pics}}" wx:for-item="pic"  bindtap="viewImage" data-url="{{item.pics[0]}}" data-urls="{{item.pics}}">
-				<image src="{{pic}}" mode="widthFix"></image>				
-			</swiper-item>
-		</swiper>
+<view class="bg-white solids-bottom" wx:for="{{checkPlan.allPics}}" wx:key="index" data-index="{{index}}" wx:if="{{index==tabCur}}">
+  <swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+    <swiper-item wx:for="{{item.pics}}" wx:for-item="pic" bindtap="viewImage" data-url="{{item.pics[0]}}" data-urls="{{item.pics}}">
+      <image src="{{pic}}" mode="widthFix"></image>
+    </swiper-item>
+  </swiper>
 
+</view>
+<view class="bg-white footer-btns" wx:for="{{checkPlan.checkDatas}}" wx:key="index" data-index="{{index}}" wx:if="{{index==tabCur}}">
+<block wx:if="{{item.dataList && item.dataList.length>0}}">
+  <view class="padding solid-bottom flex align-center" wx:if="{{checkData.result}}" wx:for="{{item.dataList}}" wx:key="index" wx:for-item="checkData">
+    <view class="flex-sub">{{checkData.title}}</view>
+    <view class="color-{{checkData.prompt?1:0}}">
+      <text>{{checkData.result}}</text>
+      <text class="color-1" wx:if="{{checkData.prompt}}">{{checkData.prompt}}</text>
+    </view>
+  </view>
+</block>
+  
 </view>
 <view class="flex footer text-center bg-white solids-top">
   <view class="round flex-sub padding margin bg-yellow text-white" bindtap="modalStatus" data-name="template">输入卫教</view>
@@ -78,7 +89,7 @@
     <form bindsubmit="submit">
       <input name="consumerId" hidden value="{{checkPlan.consumerId}}"></input>
       <view class="flex padding text-left">
-        <textarea maxlength="-1" class="flex-sub bg-gray padding" placeholder="卫教内容"  name="content" style="height: 30vh;"></textarea>
+        <textarea maxlength="-1" class="flex-sub bg-gray padding" placeholder="卫教内容" name="content" style="height: 30vh;"></textarea>
       </view>
       <view class="cu-bar bg-white justify-end">
         <view class="action">

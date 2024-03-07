@@ -45,5 +45,12 @@ CustomPage({
       that.getList(pageNo);
     }
   },
-
+  changStatus(e){
+    console.log(e);
+    Api.highRiskMemberPut(JSON.stringify(e.currentTarget.dataset.id)).then(res=>{
+      that.showTips("操作成功","success");      
+    },err=>{
+      that.showTips(err.msg);
+    })
+  },
 })

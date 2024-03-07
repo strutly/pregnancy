@@ -1,11 +1,15 @@
 <topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
 <view class="padding bg-white flex align-center solid-bottom">
-  <image src="/images/head.png" class="round" style="width: 100rpx;height:100rpx"></image>
+  <image src="{{checkPlan.userInfo.headImgUrl||'/images/head.png'}}" class="round" style="width: 100rpx;height:100rpx"></image>
   <view class="flex-sub margin-left">
-    <view class="flex">
-      <text class="margin-right">{{checkPlan.name}}</text>
-      <text class="margin-right">{{checkPlan.age}}岁</text>
-      <text class="text-right flex-sub margin-right text-main">{{checkPlan.weekDay}}</text>
+    <view class="flex align-center">
+      <view class="flex-sub">
+        <text class="margin-right">{{checkPlan.name}}</text>
+        <text class="margin-right">{{checkPlan.age}}岁</text>
+        <text class=" margin-right text-main">{{checkPlan.weekDay}}</text>
+      </view>
+      <text class="margin-right-xs">高危</text>
+      <switch checked="{{checkPlan.ifHighRisk}}" bindtap="changStatus" data-id="{{checkPlan.consumerId}}" class="red"></switch>
     </view>
     <view class="margin-top flex">
       <text class="margin-right">{{checkPlan.phoneNumber}}</text>
@@ -53,8 +57,9 @@
 </view>
 <scroll-view scroll-x class="bg-white nav">
   <view class="flex text-center">
-    <view bindtap="tabChange" class="cu-item flex-sub {{index==tabCur?'text-main cur':''}}" wx:for="{{checkPlan.allPics}}" wx:key="index" data-index="{{index}}">
+    <view bindtap="tabChange" style="position: relative;" class="cu-item flex-sub {{index==tabCur?'text-main cur':''}}" wx:for="{{checkPlan.allPics}}" wx:key="index" data-index="{{index}}">
       {{item.title}}
+      <view class="cu-tag badge" wx:if="{{checkPlan.prompts[item.title]>0}}">{{checkPlan.prompts[item.title]}}</view>
     </view>
   </view>
 </scroll-view>
@@ -68,16 +73,16 @@
 
 </view>
 <view class="bg-white footer-btns" wx:for="{{checkPlan.checkDatas}}" wx:key="index" data-index="{{index}}" wx:if="{{index==tabCur}}">
-<block wx:if="{{item.dataList && item.dataList.length>0}}">
-  <view class="padding solid-bottom flex align-center" wx:if="{{checkData.result}}" wx:for="{{item.dataList}}" wx:key="index" wx:for-item="checkData">
-    <view class="flex-sub">{{checkData.title}}</view>
-    <view class="color-{{checkData.prompt?1:0}}">
-      <text>{{checkData.result}}</text>
-      <text class="color-1" wx:if="{{checkData.prompt}}">{{checkData.prompt}}</text>
+  <block wx:if="{{item.dataList && item.dataList.length>0}}">
+    <view class="padding solid-bottom flex align-center" wx:if="{{checkData.result}}" wx:for="{{item.dataList}}" wx:key="index" wx:for-item="checkData">
+      <view class="flex-sub">{{checkData.title}}</view>
+      <view class="color-{{checkData.prompt?1:0}}">
+        <text>{{checkData.result}}</text>
+        <text class="color-1" wx:if="{{checkData.prompt}}">{{checkData.prompt}}</text>
+      </view>
     </view>
-  </view>
-</block>
-  
+  </block>
+
 </view>
 <view class="flex footer text-center bg-white solids-top">
   <view class="round flex-sub padding margin bg-yellow text-white" bindtap="modalStatus" data-name="template">输入卫教</view>

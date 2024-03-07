@@ -9,8 +9,8 @@
   <view class="flex align-center"><text class="cuIcon-upload margin-right-sm"></text>孕检上报</view>
   <view>
     <view class="flex align-center margin-top text-bold" wx:for="{{checkList}}" data-url="/pages/check/detail?id={{item.id}}" bindtap="toUrl">
-      <view class="flex-twice">{{item.name}}</view>
-      <view class="flex-twice">{{item.weekDay}}</view>
+      <view class="flex-sub margin-right" style="position: relative;">{{item.name}}<view class="cu-tag badge" wx:if="{{item.allPrompt>0}}">{{item.allPrompt}}</view></view>
+      <view class="flex-twice margin-left">{{item.weekDay}}</view>
       <view class="flex-treble text-right text-gray">{{utils.timeago(item.updateTime)}}</view>
     </view> 
   </view>

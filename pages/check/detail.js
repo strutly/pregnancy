@@ -39,6 +39,22 @@ CustomPage({
       that.showTips(err.msg);
     })
   },
+  changStatus(e){
+    console.log(e);
+    let checkPlan = that.data.checkPlan;
+    Api.highRiskMemberPut(JSON.stringify(e.currentTarget.dataset.id)).then(res=>{
+      checkPlan.ifHighRisk = !checkPlan.ifHighRisk;
+      that.setData({
+        checkPlan:checkPlan
+      })
+      that.showTips("操作成功","success");      
+    },err=>{
+      that.showTips(err.msg);      
+      that.setData({
+        checkPlan:checkPlan
+      })
+    })
+  },
   submit(e){
     let data = e.detail.value;
     if(!data.content) return that.showTips("请先输入卫教内容");

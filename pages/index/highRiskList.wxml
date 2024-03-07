@@ -2,7 +2,7 @@
   <view class="cu-item solid-bottom" wx:for="{{members}}" wx:key="index">
     <image class="cu-avatar round lg" src="{{item.userInfo.headImgUrl}}"></image>
     <view class="content">
-      <view>{{item.name}}</view>
+      <view>{{item.name}} <text class="margin-left">{{item.age}} 岁</text></view>
       <view class="text-gray text-sm flex">
         <view>
           <view class="cu-capsule round sm" wx:for="{{item.prompts}}" wx:for-index="key" wx:for-item="num">
@@ -22,7 +22,9 @@
       </view>
     </view>
     <view class="action">
-      <view class="text-lg">{{item.age}} 岁</view>
+      <view class="text-lg">
+        <switch checked bindtap="changStatus" data-id="{{item.id}}" class="red"></switch>
+      </view>
       <view class="cu-tag round bg-grey sm">{{item.weekDay}}</view>
     </view>
   </view>

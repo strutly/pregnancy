@@ -58,6 +58,7 @@ CustomPage({
   editNote(e){
     that.setData({
       modalNote:true,
+      noteFlag:e.currentTarget.dataset.note,
       consumerId:e.currentTarget.dataset.id
     })
   },
@@ -66,8 +67,12 @@ CustomPage({
     let data = e.detail.value;
     if(!data.note) return that.showTips("请先填写备注信息");
     Api.consumerNoteAdd(JSON.stringify(data)).then(res=>{
+      let members = that.data.members;
+      let member = members.find(c=>c.id==data.consumerId);
+      member.ifNote = true;
       that.setData({
-        modalNote:false,
+        members:members,
+        modalNote:false
       })
       that.showTips("操作成功","success");
     },err=>{

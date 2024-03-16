@@ -14,7 +14,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "孕期管理",
+    "navigationBarTitleText": "孕期管理小助手",
     "navigationBarTextStyle": "black"
   },
   "usingComponents": {

@@ -2,30 +2,17 @@
   <view class="cu-item solid-bottom" wx:for="{{members}}" wx:key="index">
     <image class="cu-avatar round lg" src="{{item.userInfo.headImgUrl}}"></image>
     <view class="content">
-      <view>{{item.name}} <text class="margin-left">{{item.age}} 岁</text></view>
+      <view>{{item.consumerInfo.name}} <text class="margin-left">{{item.consumerInfo.age}} 岁</text></view>
       <view class="text-gray text-sm flex">
-        <view>
-          <view class="cu-capsule round sm" wx:for="{{item.prompts}}" wx:for-index="key" wx:for-item="num">
-            <view class='cu-tag bg-orange'>
-              {{key}}
-            </view>
-            <view class="cu-tag line-red">
-              {{num}}
-            </view>
-          </view>
-        </view>
         <view class='flex flex-wrap'>
-          <view class="padding-xs" wx:for="{{item.highRisks}}" wx:key="index" wx:for-item="highRisk">
-            <view class='cu-tag line-yellow'>{{highRisk.name}}</view>
+          <view class="padding-xs" wx:for="{{item.higkRisks}}" wx:for-item="value" wx:for-index="key" wx:key="key" >    
+            <view class='cu-tag line-{{value}}'>{{key}}</view>
           </view>
         </view>
       </view>
     </view>
     <view class="action">
-      <view class="text-lg">
-        <switch checked bindtap="changStatus" data-id="{{item.id}}" class="red"></switch>
-      </view>
-      <view class="cu-tag round bg-grey sm">{{item.weekDay}}</view>
+      <view class="cu-tag round bg-grey sm">{{item.consumerInfo.weekDay}}</view>
     </view>
   </view>
 </view>

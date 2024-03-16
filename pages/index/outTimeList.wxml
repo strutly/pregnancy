@@ -30,7 +30,7 @@
       <view class="bg-mauve round padding-tb-xs text-sm" data-phone="{{item.phoneNumber}}" bindtap="callPhone">
         <text class="cuIcon-phone text-lg"></text>拨号
       </view>
-      <view class="bg-cyan round padding-tb-xs text-sm" bindtap="editNote" data-id="{{item.id}}">
+      <view class="{{item.ifNote?'bg-cyan':'bg-grey'}} round padding-tb-xs text-sm" bindtap="editNote" data-note="{{item.ifNote}}" data-id="{{item.id}}">
         <text class="cuIcon-edit"></text>备注
       </view>
     </view>
@@ -48,7 +48,7 @@
       </view>
 
       <view class="cu-form-group text-left solids-top solids-bottom">
-        <textarea name="note" maxlength="-1" placeholder="电话备注消息"></textarea>
+        <textarea name="note" value="{{noteFlag?'已备注':''}}" maxlength="-1" placeholder="电话备注消息"></textarea>
       </view>
 
       <view class="cu-bar bg-white justify-end">

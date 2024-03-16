@@ -9,7 +9,7 @@
         <text class=" margin-right text-main">{{checkPlan.weekDay}}</text>
       </view>
       <text class="margin-right-xs">高危</text>
-      <switch checked="{{checkPlan.ifHighRisk}}" bindtap="changStatus" data-id="{{checkPlan.consumerId}}" class="red"></switch>
+      <switch disabled checked="{{checkPlan.ifHighRisk}}"  data-id="{{checkPlan.consumerId}}" class="red"></switch>
     </view>
     <view class="margin-top flex">
       <text class="margin-right">{{checkPlan.phoneNumber}}</text>
